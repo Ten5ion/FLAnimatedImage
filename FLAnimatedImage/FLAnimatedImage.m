@@ -178,11 +178,19 @@ static NSHashTable *allAnimatedImagesWeak;
 
 - (instancetype)initWithAnimatedGIFData:(NSData *)data
 {
-    return [self initWithAnimatedGIFData:data optimalFrameCacheSize:0 predrawingEnabled:YES];
+    return [self initWithAnimatedGIFData:data speed:1.0];
 }
 
-- (instancetype)initWithAnimatedGIFData:(NSData *)data optimalFrameCacheSize:(NSUInteger)optimalFrameCacheSize predrawingEnabled:(BOOL)isPredrawingEnabled
+- (instancetype)initWithAnimatedGIFData:(NSData *)data speed:(float)speed
 {
+    return [self initWithAnimatedGIFData:data speed:speed optimalFrameCacheSize:0 predrawingEnabled:YES];
+}
+
+- (instancetype)initWithAnimatedGIFData:(NSData *)data speed:(float)speed optimalFrameCacheSize:(NSUInteger)optimalFrameCacheSize predrawingEnabled:(BOOL)isPredrawingEnabled
+{
+    speed = MAX(speed, 0.01);
+    speed = MIN(speed, 10.0);
+    
     // Early return if no data supplied!
     const BOOL hasData = (data.length > 0);
     if (!hasData) {
@@ -198,8 +206,6 @@ static NSHashTable *allAnimatedImagesWeak;
         // However, we will use the `_imageSource` as handler to the image data throughout our life cycle.
         _data = data;
         _predrawingEnabled = isPredrawingEnabled;
-
-        _speed = 1.0;
         
         // Initialize internal data structures
         _cachedFramesForIndexes = [[NSMutableDictionary alloc] init];
@@ -297,7 +303,7 @@ static NSHashTable *allAnimatedImagesWeak;
                             FLLog(FLLogLevelInfo, @"Rounding frame %zu's `delayTime` from %f up to default %f (minimum supported: %f).", i, [delayTime floatValue], kDelayTimeIntervalDefault, kFLAnimatedImageDelayTimeIntervalMinimum);
                             delayTime = @(kDelayTimeIntervalDefault);
                         }
-                        delayTimesForIndexesMutable[@(i)] = [NSNumber numberWithFloat:delayTime.floatValue / _speed];
+                        delayTimesForIndexesMutable[@(i)] = [NSNumber numberWithFloat:delayTime.floatValue / speed];
                     } else {
                         skippedFrameCount++;
                         FLLog(FLLogLevelInfo, @"Dropping frame %zu because valid `CGImageRef` %@ did result in `nil`-`UIImage`.", i, frameImageRef);
