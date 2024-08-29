@@ -15,6 +15,7 @@ xcuserdata
 profile
 *.moved-aside
 *.xcworkspacedata
+.DS_Store
 
 # CocoaPods
 #
