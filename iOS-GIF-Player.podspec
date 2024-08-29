@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = "iOS-GIF-Player"
-  spec.version          = "0.0.2"
+  spec.version          = "0.0.3"
   spec.summary          = "Performant animated GIF engine for iOS"
   spec.description      = <<-DESC
                         - Plays multiple GIFs simultaneously with a playback speed comparable to desktop browsers
