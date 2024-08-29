@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   spec.license          = { :type => "MIT", :file => "LICENSE" }
   spec.author           = { "Ten5ion" => "jay.zhang@happyelements.com" }
   spec.platform         = :ios, "9.0"
-  spec.source           = { :git => "https://github.com/Ten5ion/FLAnimatedImage.git", :tag => "0.0.1" }
+  spec.source           = { :git => "https://github.com/Ten5ion/FLAnimatedImage.git", :tag => "0.0.5" }
   spec.source_files     = "FLAnimatedImage/**/*.{h,m}"
   spec.frameworks       = "QuartzCore", "ImageIO", "CoreGraphics"
   spec.requires_arc     = true

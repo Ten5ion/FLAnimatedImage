@@ -57,7 +57,6 @@ extern const NSTimeInterval kFLAnimatedImageDelayTimeIntervalMinimum;
 @property (nonatomic, strong, readonly) NSData *data; // The data the receiver was initialized with; read-only
 
 @property (nonatomic, assign) float speed;
-@property (nonatomic, assign) NSNumber speedNum;
 
 @end
 
